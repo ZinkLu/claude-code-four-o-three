@@ -1,0 +1,14 @@
+{
+  "name": "zinklu",
+  "description": "zinklu 的 Claude Code 插件",
+  "owner": {
+    "name": "zinklu"
+  },
+  "plugins": [
+    {
+      "name": "cc-four-o-three",
+      "source": "./",
+      "description": "原生 Mod：IP、ASN 与域名、时区差异提醒、变化确认、双向翻译和深夜提醒"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+# 运行时数据（真实 IP、缓存、配置）
+data/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# 构建产物（发行包上传到 GitHub Releases，不入库）
+dist/*.zip
+dist/*.zip.sha256
+
+# 环境变量与本地密钥
+.env
+.env.*
+!.env.example
+
+# 编辑器与系统
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp

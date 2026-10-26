@@ -1,0 +1,85 @@
+{
+  "name": "cc-four-o-three",
+  "displayName": "CC Four-O-Three",
+  "version": "0.3.3",
+  "description": "IP、ASN 与域名状态、变化确认、时区差异提醒、双向翻译、目标时区深夜提醒和原生设置面板",
+  "author": {
+    "name": "zinklu"
+  },
+  "license": "MIT",
+  "icon": "./assets/icon.png",
+  "keywords": [
+    "mod",
+    "ip",
+    "timezone",
+    "translation"
+  ],
+  "hooks": "./hooks/hooks.json",
+  "userConfig": {
+    "translation_enabled": {
+      "type": "boolean",
+      "title": "启用双向翻译",
+      "description": "中文输入翻译后发送，Claude 回复显示中文译文",
+      "default": true
+    },
+    "translation_provider": {
+      "type": "string",
+      "title": "翻译提供商",
+      "description": "使用 Claude Code 的模型调用，或独立的 OpenAI 兼容端点",
+      "default": "claude",
+      "options": ["claude", "openai-compatible"]
+    },
+    "translation_model": {
+      "type": "string",
+      "title": "翻译模型",
+      "description": "独立于主会话模型的翻译模型 ID",
+      "default": "haiku"
+    },
+    "translation_base_url": {
+      "type": "string",
+      "title": "OpenAI 兼容端点",
+      "description": "提供商为 openai-compatible 时使用的 Base URL",
+      "default": "https://api.openai.com/v1"
+    },
+    "translation_api_key": {
+      "type": "string",
+      "title": "翻译 API Key",
+      "description": "OpenAI 兼容端点的密钥，保存在系统安全凭据存储中",
+      "sensitive": true
+    },
+    "target_language": {
+      "type": "string",
+      "title": "输入目标语言",
+      "description": "auto 表示按 IP 所在国家或地区推断，也可填写 English、Japanese、zh-Hant 等",
+      "default": "auto"
+    },
+    "ip_change_confirmation": {
+      "type": "boolean",
+      "title": "IP 变化确认",
+      "description": "启动及发送 Prompt 时检测 IP 变化并询问是否继续",
+      "default": true
+    },
+    "quiet_enabled": {
+      "type": "boolean",
+      "title": "深夜操作提醒",
+      "description": "按 IP 所在时区判断，发送前询问是否继续",
+      "default": true
+    },
+    "quiet_start": {
+      "type": "number",
+      "title": "睡眠时段开始小时",
+      "description": "0–24 的整数，开始包含；与结束小时相等时不检查",
+      "default": 0,
+      "min": 0,
+      "max": 24
+    },
+    "quiet_end": {
+      "type": "number",
+      "title": "睡眠时段结束小时",
+      "description": "0–24 的整数，结束不包含；默认 06:00 后不再提醒",
+      "default": 6,
+      "min": 0,
+      "max": 24
+    }
+  }
+}
