@@ -1,7 +1,7 @@
 {
   "name": "cc-four-o-three",
   "displayName": "CC Four-O-Three",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "IP、ASN 与域名状态、变化确认、时区差异提醒、双向翻译、目标时区深夜提醒和原生设置面板",
   "author": {
     "name": "zinklu"
