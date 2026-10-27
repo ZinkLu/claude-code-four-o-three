@@ -651,7 +651,19 @@ export function register(on, options = {}) {
           }
         },
       }),
-      Text({ key: 'key-status', dimColor: true, children: `API Key：${currentSettings.translation_api_key ? '已配置（安全存储）' : '未配置；通过插件敏感配置设置'}` }),
+      Text({ key: 'key-status', dimColor: true, children: `API Key：${currentSettings.translation_api_key ? '已配置（安全存储）' : '未配置'}` }),
+      Button({
+        key: 'configure-api-key',
+        label: '配置 API Key（安全存储）',
+        onPress: async () => {
+          try {
+            await $.ui.close({ id: PANE })
+            await $.command.run({ command: 'plugin', args: 'configure cc-four-o-three@zinklu' })
+          } catch (error) {
+            $.ui.toast(`无法打开配置页，请手动执行 /plugin configure cc-four-o-three@zinklu：${errorText(error)}`, { timeoutMs: 8000 })
+          }
+        },
+      }),
       Input({
         key: 'target-language',
         label: '目标语言',

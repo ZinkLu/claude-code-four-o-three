@@ -103,7 +103,7 @@ Claude 会要求确认添加本地 marketplace，然后打开插件详情。建�
 /plugin configure cc-four-o-three@zinklu
 ```
 
-配置 `translation_provider`、`translation_model`、`translation_base_url` 和敏感项 `translation_api_key`。也可以输入 `/cc-four-o-three` 打开面板修改非敏感设置。
+配置 `translation_provider`、`translation_model`、`translation_base_url` 和敏感项 `translation_api_key`。也可以输入 `/cc-four-o-three` 打开面板修改非敏感设置，或点击“配置 API Key（安全存储）”打开同一原生配置页面。API Key 由 Claude Code 保存在系统安全凭据存储中，保存后按提示重载插件或重启 Claude Code。
 
 ## 5. 检查安装
 

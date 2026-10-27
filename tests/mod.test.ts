@@ -460,3 +460,60 @@ test('the native settings pane persists translation, language and quiet-hour cha
   expect(saved.target_language).toBe('Japanese')
   expect(saved.translation_model).toBe('new-model')
 })
+
+test('the settings pane opens native secure API key configuration', {
+  options: { translation_enabled: false, quiet_enabled: false },
+}, async ($, on) => {
+  mock.clock(on)
+  const kept = store(on)
+  on('ui.render', { component: 'Pane' }, async ($: any, e: any) => $.ui.resolve(e).Box({}))
+  const closes: string[] = []
+  on('ui.close', async ($: any, e: any) => {
+    closes.push(e.id)
+    return { value: undefined }
+  })
+  const commands: { command: string, args: string }[] = []
+  on('command.run', { command: 'plugin' }, async ($: any, e: any) => {
+    commands.push({ command: e.command, args: e.args })
+    return { value: {} }
+  })
+
+  const drawn = await $.ui.render({
+    component: 'Pane',
+    surface: 'terminal',
+    requestId: 'cc-four-o-three',
+    props: { title: 'CC Four-O-Three', isFocused: true },
+  } as any)
+  expect(byKey(drawn, 'configure-api-key')).not.toBeNull()
+  await ($.ui as any).press({ plugin: 'cc-four-o-three', key: 'configure-api-key' })
+
+  expect(closes).toEqual(['cc-four-o-three'])
+  expect(commands).toEqual([{ command: 'plugin', args: 'configure cc-four-o-three@zinklu' }])
+  expect(kept.size).toBe(0)
+})
+
+test('the API key configuration entry shows a manual command when the native page cannot open', {
+  options: { translation_enabled: false, quiet_enabled: false },
+}, async ($, on) => {
+  mock.clock(on)
+  store(on)
+  on('ui.render', { component: 'Pane' }, async ($: any, e: any) => $.ui.resolve(e).Box({}))
+  on('ui.close', async () => ({ value: undefined }))
+  on('command.run', { command: 'plugin' }, async () => ({ deny: 'unavailable' }))
+  const notices: string[] = []
+  on('ui.toast', async ($: any, e: any) => {
+    notices.push(e.text)
+    return { value: undefined }
+  })
+
+  await $.ui.render({
+    component: 'Pane',
+    surface: 'terminal',
+    requestId: 'cc-four-o-three',
+    props: { title: 'CC Four-O-Three', isFocused: true },
+  } as any)
+  await ($.ui as any).press({ plugin: 'cc-four-o-three', key: 'configure-api-key' })
+
+  expect(notices.join('\n')).toContain('/plugin configure cc-four-o-three@zinklu')
+  expect(notices.join('\n')).toContain('unavailable')
+})

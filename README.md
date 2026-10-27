@@ -30,6 +30,7 @@ claude --plugin-dir <本仓库绝对路径>
 
 - IP 数据默认保存在 `~/.claude/plugins/data/cc-four-o-three/`，可用 `CC_FOUR_O_THREE_DATA_DIR` 指定其他目录。
 - 翻译默认走 Claude Code 自身的模型，也可切换到独立的 OpenAI 兼容端点，需要单独配置 API Key。
+- 在 `/cc-four-o-three` 面板点击“配置 API Key（安全存储）”，可打开原生配置页面补配或修改密钥。
 - 离线安装包说明见 `INSTALL.md`，发行包用 `./scripts/build-release.sh` 构建。
 
 MIT
